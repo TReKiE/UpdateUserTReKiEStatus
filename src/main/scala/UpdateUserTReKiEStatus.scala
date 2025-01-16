@@ -27,7 +27,7 @@ object UpdateUserTReKiEStatus {
       }
     } catch {
       case e: SQLException if e.getErrorCode == 1045 => // 1045=access denied
-        println(s"${Colors.redChar}Access denied. Please check your database credentials and permissions.${Colors.resetChar}")
+        println(s"${Colors.redChar}Access denied to the database.  Please check InitUsersDB.sql has been run, and/or a custom application.conf has been correctly set up.${Colors.resetChar}")
         checkDefaults(jdbcUrl, username, password)
       case e: SQLException =>
         println(s"${Colors.redChar}SQL Error: ${e.getMessage}, Code: ${e.getErrorCode}${Colors.resetChar}")
@@ -47,9 +47,9 @@ object UpdateUserTReKiEStatus {
   }
 
   def checkDefaults(jdbcUrl: String, username: String, password: String): Unit = {
-    if (jdbcUrl == "jdbc:mysql://localhost:3306/X_database_name" || username == "X_db_user" || password == "X_db_password") {
-      println(s"${Colors.magentaChar}Some of the database connection values appear to be same as the reference conf, is this right?")
-      println(s"Please make an application.conf with the correct values.${Colors.resetChar}")
+    if (jdbcUrl == "jdbc:mysql://localhost:3306/X_database" && username == "X_db_user" && password == "X_db_password") {
+      println(s"${Colors.magentaChar}The database connection values appear to be the default.")
+      println(s"Please run InitUsersDB.sql on your SQL server or configure an application.conf with a custom connection config.${Colors.resetChar}")
     }
   }
 }
