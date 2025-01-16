@@ -1,5 +1,16 @@
-*.class
+target/
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
 *.log
+*.tmp
+*.swp
+*.class
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# no application conf
+src/main/resources/application.conf
